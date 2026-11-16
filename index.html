@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f2ec">
+  <meta name="description" content="A selected collection of digital experiments, visual systems and spatial explorations.">
+  <title>YOUR NAME — Selected Works</title>
+  <style>
+    :root {
+      --paper: #f4f2ec;
+      --ink: #22231f;
+      --muted: #77786f;
+      --line: rgba(34,35,31,.18);
+      --accent: #a5b7a0;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, "Helvetica Neue", Arial, sans-serif;
+      --page: min(1320px, calc(100% - 9vw));
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: var(--sans); -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .topbar {
+      width: var(--page); margin: 0 auto; padding: 25px 0;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--line); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+    }
+    .brand { font-weight: 700; letter-spacing: .08em; }
+    .nav { display: flex; gap: 28px; color: var(--muted); }
+    .nav a:hover, .text-link:hover { color: var(--ink); }
+    .hero {
+      width: var(--page); margin: 0 auto; padding: clamp(76px, 12vw, 170px) 0 95px;
+      position: relative;
+    }
+    .eyebrow, .section-kicker {
+      font-size: 10px; text-transform: uppercase; letter-spacing: .18em; color: var(--muted);
+    }
+    h1 {
+      font-size: clamp(58px, 11.5vw, 158px); line-height: .88; letter-spacing: -.085em;
+      font-weight: 500; margin: 28px 0 36px; max-width: 1100px;
+    }
+    h1 em { font-family: var(--serif); font-weight: 400; letter-spacing: -.08em; }
+    .hero-bottom {
+      display: grid; grid-template-columns: 1fr minmax(220px, 390px); gap: 30px;
+      align-items: end;
+    }
+    .hero-note { font-size: 13px; line-height: 1.7; color: var(--muted); max-width: 390px; }
+    .hero-index { text-align: right; font-size: 10px; letter-spacing: .13em; color: var(--muted); }
+    .rule { width: var(--page); height: 1px; background: var(--line); margin: 0 auto; }
+    .work { width: var(--page); margin: 0 auto; padding: 32px 0 120px; }
+    .section-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin: 0 0 42px;
+    }
+    .section-head h2 { font-size: 13px; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; }
+    .section-head span { color: var(--muted); font-size: 11px; }
+    .project-grid {
+      display: grid; grid-template-columns: 1.12fr .88fr; column-gap: 8.5%;
+      row-gap: 105px; align-items: start;
+    }
+    .project { min-width: 0; cursor: pointer; }
+    .project:nth-child(2) { margin-top: 125px; }
+    .project:nth-child(3) { margin-top: -30px; }
+    .project:nth-child(4) { margin-top: 95px; }
+    .project-image {
+      overflow: visible; background: transparent; position: relative;
+      aspect-ratio: 1.32 / 1; display: block; isolation: isolate;
+    }
+    .project-image::before {
+      content: ""; position: absolute; inset: 5% -3% -3% 3%;
+      background: #e5e1d7; z-index: -1; transform: rotate(-2deg);
+      border: 1px solid rgba(34,35,31,.08);
+    }
+    .project-image .photo {
+      position: relative; z-index: 1; width: 100%; height: 100%;
+      overflow: hidden; background: #e7e4dc; display: block;
+    }
+    .sticker {
+      position: absolute; z-index: 3; pointer-events: auto; user-select: none;
+      display: grid; place-items: center; transform-origin: center;
+      transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;
+      filter: drop-shadow(0 5px 5px rgba(0,0,0,.08));
+    }
+    .sticker svg { width: 100%; height: 100%; overflow: visible; }
+    .sticker:hover { transform: scale(1.28) rotate(16deg) !important; filter: drop-shadow(0 8px 8px rgba(0,0,0,.13)); }
+    .sticker-star { width: 48px; height: 48px; top: -20px; right: 8%; animation: bob 4s ease-in-out infinite; }
+    .sticker-flower { width: 58px; height: 58px; bottom: 7%; left: -25px; animation: bob 5s ease-in-out infinite reverse; }
+    .sticker-loop { width: 76px; height: 42px; top: 13%; left: -37px; animation: sway 6s ease-in-out infinite; }
+    .sticker-smile { width: 48px; height: 48px; right: -18px; bottom: 17%; animation: bob 4.6s ease-in-out infinite; }
+    .sticker-spark { width: 36px; height: 36px; top: -17px; left: 16%; animation: twinkle 2.4s ease-in-out infinite; }
+    .project:nth-child(2) .sticker-flower { left: auto; right: -22px; bottom: 13%; }
+    .project:nth-child(2) .sticker-loop { left: auto; right: -32px; top: 18%; }
+    .project:nth-child(3) .sticker-smile { right: auto; left: -19px; bottom: 10%; }
+    .project:nth-child(4) .sticker-flower { left: auto; right: -22px; }
+    @keyframes bob { 0%,100% { translate: 0 0; rotate: -5deg; } 50% { translate: 0 -12px; rotate: 7deg; } }
+    @keyframes sway { 0%,100% { translate: 0 0; rotate: -8deg; } 50% { translate: 9px -7px; rotate: 8deg; } }
+    @keyframes twinkle { 0%,100% { scale: .85; rotate: 0deg; opacity: .7; } 50% { scale: 1.12; rotate: 24deg; opacity: 1; } }
+    .project-image:hover .sticker { animation-play-state: paused; }
+    .project-image:hover .sticker-star { transform: rotate(25deg) scale(1.18); }
+    .project-image:hover .sticker-flower { transform: rotate(-20deg) scale(1.15); }
+    .project-image:hover .sticker-loop { transform: translateX(10px) rotate(12deg); }
+    .project-image:hover .sticker-smile { transform: rotate(15deg) scale(1.2); }
+    .project:nth-child(2) .project-image { aspect-ratio: .94 / 1; }
+    .project:nth-child(3) .project-image { aspect-ratio: .78 / 1; }
+    .project:nth-child(4) .project-image { aspect-ratio: 1.38 / 1; }
+    .project-image img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .8s cubic-bezier(.2,.7,.2,1), filter .5s ease;
+    }
+    .project-image .photo { width: 100%; height: 100%; display: block; }
+    .project-image .photo img { width: 100%; height: 100%; }
+    .project:nth-child(3) .project-image .photo img { object-fit: contain; background: #080808; }
+    .project:hover .project-image .photo img { transform: scale(1.035); }
+    .project-meta {
+      display: flex; justify-content: space-between; gap: 14px; align-items: baseline;
+      padding-top: 17px; border-top: 1px solid var(--line); margin-top: 14px;
+    }
+    .project-number { color: var(--muted); font-size: 10px; letter-spacing: .12em; }
+    .project-title { font-size: clamp(17px, 2vw, 24px); font-weight: 500; letter-spacing: -.04em; }
+    .project-type { color: var(--muted); font-size: 10px; text-align: right; }
+    .about {
+      background: #e9e7df; padding: 95px max(4.5vw, calc((100% - 1320px)/2));
+      display: grid; grid-template-columns: .7fr 1.3fr; gap: 9%;
+    }
+    .about h2 { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; font-weight: 500; }
+    .about-copy { max-width: 700px; }
+    .about-copy p { margin: 0 0 18px; font-family: var(--serif); font-size: clamp(23px, 3vw, 39px); line-height: 1.28; letter-spacing: -.035em; }
+    .about-copy .small { font: 13px/1.8 var(--sans); color: var(--muted); max-width: 540px; }
+    .contact {
+      width: var(--page); margin: 0 auto; padding: 85px 0 55px;
+      display: flex; justify-content: space-between; align-items: end; gap: 30px;
+    }
+    .contact h2 { margin: 15px 0 0; font-size: clamp(42px, 8vw, 100px); font-weight: 500; letter-spacing: -.08em; }
+    .contact-right { text-align: right; font-size: 12px; line-height: 2; color: var(--muted); }
+    footer {
+      width: var(--page); margin: 0 auto; padding: 18px 0 25px; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; color: var(--muted);
+      font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .modal {
+      position: fixed; inset: 0; z-index: 10; background: rgba(20,21,19,.62);
+      display: none; align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal.open { display: flex; }
+    .modal-panel {
+      width: min(1050px, 100%); max-height: 92vh; overflow: auto; background: var(--paper);
+      display: grid; grid-template-columns: 1.1fr .9fr; position: relative;
+    }
+    .modal-visual { min-height: 380px; background: #e6e3db; display: flex; align-items: center; }
+    .modal-visual img { display: block; width: 100%; max-height: 82vh; object-fit: contain; }
+    .modal-copy { padding: clamp(28px, 5vw, 60px); align-self: center; }
+    .modal-copy h3 { font-size: clamp(30px, 4vw, 48px); line-height: .98; letter-spacing: -.06em; font-weight: 500; margin: 20px 0; }
+    .modal-copy p { color: #66675f; font-size: 13px; line-height: 1.8; }
+    .modal-copy .detail-label { margin-top: 28px; font-size: 9px; text-transform: uppercase; letter-spacing: .15em; color: var(--muted); }
+    .close {
+      position: absolute; top: 14px; right: 17px; border: 0; background: var(--paper);
+      width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 22px;
+    }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 700px) {
+      :root { --page: calc(100% - 40px); }
+      .topbar { padding: 19px 0; }
+      .nav { gap: 14px; font-size: 9px; }
+      .hero { padding: 90px 0 70px; }
+      h1 { font-size: clamp(55px, 16vw, 95px); }
+      .hero-bottom { grid-template-columns: 1fr; }
+      .hero-index { text-align: left; }
+      .project-grid { grid-template-columns: 1fr; row-gap: 58px; }
+      .project:nth-child(n) { margin-top: 0; }
+      .project:nth-child(2), .project:nth-child(4) { width: 88%; margin-left: auto; }
+      .project:nth-child(3) { width: 92%; }
+      .about { padding: 65px 20px; grid-template-columns: 1fr; gap: 30px; }
+      .contact { padding: 65px 0 45px; display: block; }
+      .contact-right { text-align: left; margin-top: 25px; }
+      .modal-panel { grid-template-columns: 1fr; }
+      .modal-visual { min-height: 220px; }
+      .modal-visual img { max-height: 45vh; }
+      footer { font-size: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sticker { animation: none !important; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">YOUR NAME®</a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#work">Works</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow reveal">Independent design portfolio · 2026—2027</div>
+      <h1 class="reveal">Making sense<br>of <em>visual</em><br>experiences.</h1>
+      <div class="hero-bottom reveal">
+        <p class="hero-note">A collection of explorations across digital environments, generative visuals, information and space. Interested in the connections between visual language, technology and experience.</p>
+        <div class="hero-index">SELECTED WORKS<br>01 — 04 / SCROLL TO EXPLORE ↓</div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="work" id="work">
+      <div class="section-head reveal">
+        <h2>Selected works</h2><span>Four projects / A visual index</span>
+      </div>
+      <div class="project-grid">
+        <article class="project reveal" data-project="0" tabindex="0" role="button" aria-label="Open Urban Environment project">
+          <div class="project-image">
+            <span class="photo"><img src="assets/01-urban-environment.jpg" alt="A stylized digital urban environment viewed from above"></span>
+            <span class="sticker sticker-star" aria-label="decorative star"><svg viewBox="0 0 60 60"><path d="M30 3 L36 22 L56 17 L41 31 L54 47 L34 40 L27 58 L23 38 L4 43 L18 29 L5 14 L25 22Z" fill="#f4c84a" stroke="#24241f" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+            <span class="sticker sticker-flower"><svg viewBox="0 0 64 64"><g fill="#ef9ab0" stroke="#24241f" stroke-width="2"><ellipse cx="32" cy="13" rx="9" ry="14"/><ellipse cx="32" cy="51" rx="9" ry="14"/><ellipse cx="13" cy="32" rx="14" ry="9"/><ellipse cx="51" cy="32" rx="14" ry="9"/><ellipse cx="18" cy="18" rx="9" ry="13" transform="rotate(-45 18 18)"/><ellipse cx="46" cy="46" rx="9" ry="13" transform="rotate(-45 46 46)"/></g><circle cx="32" cy="32" r="9" fill="#f7d65c" stroke="#24241f" stroke-width="2"/></svg></span>
+            <span class="sticker sticker-spark"><svg viewBox="0 0 40 40"><path d="M20 1 Q22 15 39 20 Q22 23 20 39 Q17 23 1 20 Q17 17 20 1Z" fill="#9ec6bd" stroke="#24241f" stroke-width="1.8"/></svg></span>
+          </div>
+          <div class="project-meta"><span class="project-number">01 / 04</span><span class="project-title">Urban Environment</span></div>
+          <div class="project-type">Digital space · UE5</div>
+        </article>
+        <article class="project reveal" data-project="1" tabindex="0" role="button" aria-label="Open Generative Forms project">
+          <div class="project-image">
+            <span class="photo"><img src="assets/02-generative-visual.jpg" alt="Abstract green and violet particle-like generative visual"></span>
+            <span class="sticker sticker-loop"><svg viewBox="0 0 100 54"><path d="M4 35 C18 2 34 3 47 26 S76 51 96 12" fill="none" stroke="#ef9ab0" stroke-width="7" stroke-linecap="round"/><path d="M4 35 C18 2 34 3 47 26 S76 51 96 12" fill="none" stroke="#24241f" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2 5"/></svg></span>
+            <span class="sticker sticker-flower"><svg viewBox="0 0 64 64"><g fill="#f4c84a" stroke="#24241f" stroke-width="2"><ellipse cx="32" cy="13" rx="9" ry="14"/><ellipse cx="32" cy="51" rx="9" ry="14"/><ellipse cx="13" cy="32" rx="14" ry="9"/><ellipse cx="51" cy="32" rx="14" ry="9"/></g><circle cx="32" cy="32" r="9" fill="#ef9ab0" stroke="#24241f" stroke-width="2"/></svg></span>
+          </div>
+          <div class="project-meta"><span class="project-number">02 / 04</span><span class="project-title">Generative Forms</span></div>
+          <div class="project-type">Generative visual · TouchDesigner</div>
+        </article>
+        <article class="project reveal" data-project="2" tabindex="0" role="button" aria-label="Open Digital Music Visualization project">
+          <div class="project-image">
+            <span class="photo"><img src="assets/03-digital-music-visualization.jpg" alt="A dark exhibition board showing digital music visualization experiments"></span>
+            <span class="sticker sticker-smile"><svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="23" fill="#f4c84a" stroke="#24241f" stroke-width="2.2"/><circle cx="19" cy="22" r="2.4" fill="#24241f"/><circle cx="35" cy="22" r="2.4" fill="#24241f"/><path d="M17 31 Q27 43 38 31" fill="none" stroke="#24241f" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            <span class="sticker sticker-spark"><svg viewBox="0 0 40 40"><path d="M20 1 Q22 15 39 20 Q22 23 20 39 Q17 23 1 20 Q17 17 20 1Z" fill="#ef9ab0" stroke="#24241f" stroke-width="1.8"/></svg></span>
+          </div>
+          <div class="project-meta"><span class="project-number">03 / 04</span><span class="project-title">Digital Music Visualization</span></div>
+          <div class="project-type">Data visualization · Motion</div>
+        </article>
+        <article class="project reveal" data-project="3" tabindex="0" role="button" aria-label="Open Spatial Mapping project">
+          <div class="project-image">
+            <span class="photo"><img src="assets/04-spatial-mapping.jpg" alt="A pink-toned map with roads, buildings and location labels"></span>
+            <span class="sticker sticker-flower"><svg viewBox="0 0 64 64"><g fill="#9ec6bd" stroke="#24241f" stroke-width="2"><ellipse cx="32" cy="13" rx="9" ry="14"/><ellipse cx="32" cy="51" rx="9" ry="14"/><ellipse cx="13" cy="32" rx="14" ry="9"/><ellipse cx="51" cy="32" rx="14" ry="9"/><ellipse cx="18" cy="18" rx="9" ry="13" transform="rotate(-45 18 18)"/><ellipse cx="46" cy="46" rx="9" ry="13" transform="rotate(-45 46 46)"/></g><circle cx="32" cy="32" r="9" fill="#f4c84a" stroke="#24241f" stroke-width="2"/></svg></span>
+            <span class="sticker sticker-loop"><svg viewBox="0 0 100 54"><path d="M4 35 C18 2 34 3 47 26 S76 51 96 12" fill="none" stroke="#ef9ab0" stroke-width="7" stroke-linecap="round"/><path d="M4 35 C18 2 34 3 47 26 S76 51 96 12" fill="none" stroke="#24241f" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2 5"/></svg></span>
+          </div>
+          <div class="project-meta"><span class="project-number">04 / 04</span><span class="project-title">Spatial Mapping</span></div>
+          <div class="project-type">Information design · Mapping</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <h2 class="reveal">A little about me</h2>
+      <div class="about-copy reveal">
+        <p>Exploring how images, information and technology can shape the way we see and experience the world.</p>
+        <p class="small">I am an Art & Technology student interested in visual communication, digital media and experimental design. This portfolio brings together selected studies and projects that explore different ways of translating ideas into visual and spatial experiences.</p>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="reveal">
+        <div class="eyebrow">Have a project in mind?</div>
+        <h2>Let's talk<span style="color:#9aaa91">.</span></h2>
+      </div>
+      <div class="contact-right reveal">
+        <div>CONTACT</div>
+        <a class="text-link" href="mailto:your.email@example.com">your.email@example.com ↗</a>
+        <div style="margin-top:12px">BASED IN · YOUR CITY</div>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>© <span id="year"></span> YOUR NAME</span><span>Designed with curiosity · Back to top ↑</span></footer>
+
+  <div class="modal" id="projectModal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close" id="closeModal" aria-label="Close project details">×</button>
+      <div class="modal-visual"><img id="modalImage" src="" alt=""></div>
+      <div class="modal-copy">
+        <div class="eyebrow" id="modalNumber">PROJECT 01</div>
+        <h3 id="modalTitle"></h3>
+        <p id="modalDescription"></p>
+        <div class="detail-label">Focus</div>
+        <p id="modalFocus"></p>
+        <div class="detail-label">Project note</div>
+        <p id="modalNote"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Edit the project copy here. Descriptions are intentionally limited to what the supplied images support.
+    const projects = [
+      {
+        title: "Urban Environment",
+        image: "assets/01-urban-environment.jpg",
+        description: "A digital urban scene exploring the visual character of a compact streetscape. The composition brings together residential buildings, roads, street furniture and layered architectural details to create a cohesive sense of place.",
+        focus: "Digital environment · Urban composition · UE5",
+        note: "A study of how built forms and street-level elements work together to shape the atmosphere of a digital city."
+      },
+      {
+        title: "Generative Forms",
+        image: "assets/02-generative-visual.jpg",
+        description: "An abstract visual experiment built around flowing contours, particles and luminous color. Green and violet traces form an organic structure against a dark field, exploring the tension between order, movement and visual noise.",
+        focus: "Generative imagery · Particle-like forms · Digital experimentation",
+        note: "The image is presented as a visual outcome; specific input data, node networks and interaction behavior can be added once the production process is confirmed."
+      },
+      {
+        title: "Digital Music Visualization",
+        image: "assets/03-digital-music-visualization.jpg",
+        description: "A visual exploration of translating musical information into digital imagery. The project board presents a sequence from audio input and data analysis through parameter extraction, visual mapping and motion generation.",
+        focus: "Audio visualization · Data mapping · Motion graphics",
+        note: "The supplied board documents the proposed workflow and visual outcomes. Further details about the audio source and implementation can be added if needed."
+      },
+      {
+        title: "Spatial Mapping",
+        image: "assets/04-spatial-mapping.jpg",
+        description: "A map-based information design study using a restrained pink palette to organize streets, buildings, landmarks and points of interest. The visual hierarchy helps distinguish spatial structure from location-specific information.",
+        focus: "Cartographic styling · Spatial information · Visual hierarchy",
+        note: "The map is shown as a visual information layer. Its intended audience, geographic context and navigation purpose can be specified once confirmed."
+      }
+    ];
+
+    const modal = document.getElementById("projectModal");
+    const modalImage = document.getElementById("modalImage");
+    function openProject(index) {
+      const p = projects[index];
+      if (!p) return;
+      document.getElementById("modalNumber").textContent = `PROJECT ${String(index + 1).padStart(2, "0")} / 04`;
+      document.getElementById("modalTitle").textContent = p.title;
+      document.getElementById("modalDescription").textContent = p.description;
+      document.getElementById("modalFocus").textContent = p.focus;
+      document.getElementById("modalNote").textContent = p.note;
+      modalImage.src = p.image;
+      modalImage.alt = p.title;
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      document.getElementById("closeModal").focus();
+    }
+    function closeProject() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+    document.querySelectorAll(".project").forEach(card => {
+      const picture = card.querySelector(".project-image");
+      picture.addEventListener("pointermove", event => {
+        const rect = picture.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        picture.querySelectorAll(".sticker").forEach((sticker, i) => {
+          sticker.style.translate = `${x * (i + 1) * 5}px ${y * (i + 1) * 5}px`;
+        });
+      });
+      picture.addEventListener("pointerleave", () => {
+        picture.querySelectorAll(".sticker").forEach(sticker => sticker.style.translate = "");
+      });
+      card.addEventListener("click", () => openProject(Number(card.dataset.project)));
+      card.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openProject(Number(card.dataset.project));
+        }
+      });
+    });
+    document.getElementById("closeModal").addEventListener("click", closeProject);
+    modal.addEventListener("click", event => { if (event.target === modal) closeProject(); });
+    document.addEventListener("keydown", event => { if (event.key === "Escape") closeProject(); });
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
