@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f4f2ec">
   <meta name="description" content="A selected collection of digital experiments, visual systems and spatial explorations.">
-  <title>YOUR NAME — Selected Works</title>
+  <title>刘恩彤 — Selected Works</title>
   <style>
     :root {
       --paper: #f4f2ec;
@@ -32,8 +32,18 @@
       letter-spacing: .12em; text-transform: uppercase;
     }
     .brand { font-weight: 700; letter-spacing: .08em; }
+    .topbar-right { display: flex; align-items: center; gap: 28px; }
     .nav { display: flex; gap: 28px; color: var(--muted); }
     .nav a:hover, .text-link:hover { color: var(--ink); }
+    .lang-switch { display: inline-flex; align-items: center; gap: 6px; }
+    .lang-btn {
+      border: 0; background: none; padding: 2px 0; cursor: pointer;
+      color: var(--muted); font-size: 11px; letter-spacing: .12em;
+      text-transform: uppercase; transition: color .2s ease;
+    }
+    .lang-btn:hover { color: var(--ink); }
+    .lang-btn.active { color: var(--ink); font-weight: 700; }
+    .lang-sep { color: var(--line); font-size: 11px; }
     .hero {
       width: var(--page); margin: 0 auto; padding: clamp(76px, 12vw, 170px) 0 95px;
       position: relative;
@@ -168,6 +178,8 @@
       :root { --page: calc(100% - 40px); }
       .topbar { padding: 19px 0; }
       .nav { gap: 14px; font-size: 9px; }
+      .topbar-right { gap: 16px; }
+      .lang-btn { font-size: 9px; }
       .hero { padding: 90px 0 70px; }
       h1 { font-size: clamp(55px, 16vw, 95px); }
       .hero-bottom { grid-template-columns: 1fr; }
@@ -193,19 +205,28 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#">YOUR NAME®</a>
-    <nav class="nav" aria-label="Main navigation">
-      <a href="#work">Works</a><a href="#about">About</a><a href="#contact">Contact</a>
-    </nav>
+    <a class="brand" href="#" data-i18n="brand">刘恩彤®</a>
+    <div class="topbar-right">
+      <nav class="nav" aria-label="Main navigation" data-i18n-aria="nav.label">
+        <a href="#work" data-i18n="nav.work">Works</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="lang.label">
+        <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" class="lang-btn" data-lang="zh" aria-pressed="false">中文</button>
+      </div>
+    </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="eyebrow reveal">Independent design portfolio · 2026—2027</div>
-      <h1 class="reveal">Making sense<br>of <em>visual</em><br>experiences.</h1>
+      <div class="eyebrow reveal" data-i18n="hero.eyebrow">Independent design portfolio · 2026—2027</div>
+      <h1 class="reveal" data-i18n-html="hero.title">Making sense<br>of <em>visual</em><br>experiences.</h1>
       <div class="hero-bottom reveal">
-        <p class="hero-note">A collection of explorations across digital environments, generative visuals, information and space. Interested in the connections between visual language, technology and experience.</p>
-        <div class="hero-index">SELECTED WORKS<br>01 — 04 / SCROLL TO EXPLORE ↓</div>
+        <p class="hero-note" data-i18n="hero.note">A collection of explorations across digital environments, generative visuals, information and space. Interested in the connections between visual language, technology and experience.</p>
+        <div class="hero-index" data-i18n-html="hero.index">SELECTED WORKS<br>01 — 04 / SCROLL TO EXPLORE ↓</div>
       </div>
     </section>
 
@@ -213,143 +234,272 @@
 
     <section class="work" id="work">
       <div class="section-head reveal">
-        <h2>Selected works</h2><span>Four projects / A visual index</span>
+        <h2 data-i18n="work.title">Selected works</h2>
+        <span data-i18n="work.index">Four projects / A visual index</span>
       </div>
       <div class="project-grid">
-        <article class="project reveal" data-project="0" tabindex="0" role="button" aria-label="Open Urban Environment project">
+        <article class="project reveal" data-project="0" tabindex="0" role="button" aria-label="Open Urban Environment project" data-i18n-aria="p1.aria">
           <div class="project-image">
-            <span class="photo"><img src="assets/01-urban-environment.jpg" alt="A stylized digital urban environment viewed from above"></span>
+            <span class="photo"><img src="images/01-urban-environment.jpg" alt="A stylized digital urban environment viewed from above"></span>
             <span class="sticker sticker-star" aria-label="decorative star"><svg viewBox="0 0 60 60"><path d="M30 3 L36 22 L56 17 L41 31 L54 47 L34 40 L27 58 L23 38 L4 43 L18 29 L5 14 L25 22Z" fill="#f4c84a" stroke="#24241f" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
             <span class="sticker sticker-flower"><svg viewBox="0 0 64 64"><g fill="#ef9ab0" stroke="#24241f" stroke-width="2"><ellipse cx="32" cy="13" rx="9" ry="14"/><ellipse cx="32" cy="51" rx="9" ry="14"/><ellipse cx="13" cy="32" rx="14" ry="9"/><ellipse cx="51" cy="32" rx="14" ry="9"/><ellipse cx="18" cy="18" rx="9" ry="13" transform="rotate(-45 18 18)"/><ellipse cx="46" cy="46" rx="9" ry="13" transform="rotate(-45 46 46)"/></g><circle cx="32" cy="32" r="9" fill="#f7d65c" stroke="#24241f" stroke-width="2"/></svg></span>
             <span class="sticker sticker-spark"><svg viewBox="0 0 40 40"><path d="M20 1 Q22 15 39 20 Q22 23 20 39 Q17 23 1 20 Q17 17 20 1Z" fill="#9ec6bd" stroke="#24241f" stroke-width="1.8"/></svg></span>
           </div>
-          <div class="project-meta"><span class="project-number">01 / 04</span><span class="project-title">Urban Environment</span></div>
-          <div class="project-type">Digital space · UE5</div>
+          <div class="project-meta"><span class="project-number">01 / 04</span><span class="project-title" data-i18n="p1.title">Urban Environment</span></div>
+          <div class="project-type" data-i18n="p1.type">Digital space · UE5</div>
         </article>
-        <article class="project reveal" data-project="1" tabindex="0" role="button" aria-label="Open Generative Forms project">
+        <article class="project reveal" data-project="1" tabindex="0" role="button" aria-label="Open Generative Forms project" data-i18n-aria="p2.aria">
           <div class="project-image">
-            <span class="photo"><img src="assets/02-generative-visual.jpg" alt="Abstract green and violet particle-like generative visual"></span>
+            <span class="photo"><img src="images/02-generative-visual.jpg" alt="Abstract green and violet particle-like generative visual"></span>
             <span class="sticker sticker-loop"><svg viewBox="0 0 100 54"><path d="M4 35 C18 2 34 3 47 26 S76 51 96 12" fill="none" stroke="#ef9ab0" stroke-width="7" stroke-linecap="round"/><path d="M4 35 C18 2 34 3 47 26 S76 51 96 12" fill="none" stroke="#24241f" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2 5"/></svg></span>
             <span class="sticker sticker-flower"><svg viewBox="0 0 64 64"><g fill="#f4c84a" stroke="#24241f" stroke-width="2"><ellipse cx="32" cy="13" rx="9" ry="14"/><ellipse cx="32" cy="51" rx="9" ry="14"/><ellipse cx="13" cy="32" rx="14" ry="9"/><ellipse cx="51" cy="32" rx="14" ry="9"/></g><circle cx="32" cy="32" r="9" fill="#ef9ab0" stroke="#24241f" stroke-width="2"/></svg></span>
           </div>
-          <div class="project-meta"><span class="project-number">02 / 04</span><span class="project-title">Generative Forms</span></div>
-          <div class="project-type">Generative visual · TouchDesigner</div>
+          <div class="project-meta"><span class="project-number">02 / 04</span><span class="project-title" data-i18n="p2.title">Generative Forms</span></div>
+          <div class="project-type" data-i18n="p2.type">Generative visual · TouchDesigner</div>
         </article>
-        <article class="project reveal" data-project="2" tabindex="0" role="button" aria-label="Open Digital Music Visualization project">
+        <article class="project reveal" data-project="2" tabindex="0" role="button" aria-label="Open Digital Music Visualization project" data-i18n-aria="p3.aria">
           <div class="project-image">
-            <span class="photo"><img src="assets/03-digital-music-visualization.jpg" alt="A dark exhibition board showing digital music visualization experiments"></span>
+            <span class="photo"><img src="images/03-digital-music-visualization.jpg" alt="A dark exhibition board showing digital music visualization experiments"></span>
             <span class="sticker sticker-smile"><svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="23" fill="#f4c84a" stroke="#24241f" stroke-width="2.2"/><circle cx="19" cy="22" r="2.4" fill="#24241f"/><circle cx="35" cy="22" r="2.4" fill="#24241f"/><path d="M17 31 Q27 43 38 31" fill="none" stroke="#24241f" stroke-width="2.5" stroke-linecap="round"/></svg></span>
             <span class="sticker sticker-spark"><svg viewBox="0 0 40 40"><path d="M20 1 Q22 15 39 20 Q22 23 20 39 Q17 23 1 20 Q17 17 20 1Z" fill="#ef9ab0" stroke="#24241f" stroke-width="1.8"/></svg></span>
           </div>
-          <div class="project-meta"><span class="project-number">03 / 04</span><span class="project-title">Digital Music Visualization</span></div>
-          <div class="project-type">Data visualization · Motion</div>
+          <div class="project-meta"><span class="project-number">03 / 04</span><span class="project-title" data-i18n="p3.title">Digital Music Visualization</span></div>
+          <div class="project-type" data-i18n="p3.type">Data visualization · Motion</div>
         </article>
-        <article class="project reveal" data-project="3" tabindex="0" role="button" aria-label="Open Spatial Mapping project">
+        <article class="project reveal" data-project="3" tabindex="0" role="button" aria-label="Open Spatial Mapping project" data-i18n-aria="p4.aria">
           <div class="project-image">
-            <span class="photo"><img src="assets/04-spatial-mapping.jpg" alt="A pink-toned map with roads, buildings and location labels"></span>
+            <span class="photo"><img src="images/04-spatial-mapping.jpg" alt="A pink-toned map with roads, buildings and location labels"></span>
             <span class="sticker sticker-flower"><svg viewBox="0 0 64 64"><g fill="#9ec6bd" stroke="#24241f" stroke-width="2"><ellipse cx="32" cy="13" rx="9" ry="14"/><ellipse cx="32" cy="51" rx="9" ry="14"/><ellipse cx="13" cy="32" rx="14" ry="9"/><ellipse cx="51" cy="32" rx="14" ry="9"/><ellipse cx="18" cy="18" rx="9" ry="13" transform="rotate(-45 18 18)"/><ellipse cx="46" cy="46" rx="9" ry="13" transform="rotate(-45 46 46)"/></g><circle cx="32" cy="32" r="9" fill="#f4c84a" stroke="#24241f" stroke-width="2"/></svg></span>
             <span class="sticker sticker-loop"><svg viewBox="0 0 100 54"><path d="M4 35 C18 2 34 3 47 26 S76 51 96 12" fill="none" stroke="#ef9ab0" stroke-width="7" stroke-linecap="round"/><path d="M4 35 C18 2 34 3 47 26 S76 51 96 12" fill="none" stroke="#24241f" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2 5"/></svg></span>
           </div>
-          <div class="project-meta"><span class="project-number">04 / 04</span><span class="project-title">Spatial Mapping</span></div>
-          <div class="project-type">Information design · Mapping</div>
+          <div class="project-meta"><span class="project-number">04 / 04</span><span class="project-title" data-i18n="p4.title">Spatial Mapping</span></div>
+          <div class="project-type" data-i18n="p4.type">Information design · Mapping</div>
         </article>
       </div>
     </section>
 
     <section class="about" id="about">
-      <h2 class="reveal">A little about me</h2>
+      <h2 class="reveal" data-i18n="about.title">A little about me</h2>
       <div class="about-copy reveal">
-        <p>Exploring how images, information and technology can shape the way we see and experience the world.</p>
-        <p class="small">I am an Art & Technology student interested in visual communication, digital media and experimental design. This portfolio brings together selected studies and projects that explore different ways of translating ideas into visual and spatial experiences.</p>
+        <p data-i18n="about.lead">Exploring how images, information and technology can shape the way we see and experience the world.</p>
+        <p class="small" data-i18n="about.body">I am an Art & Technology student interested in visual communication, digital media and experimental design. This portfolio brings together selected studies and projects that explore different ways of translating ideas into visual and spatial experiences.</p>
       </div>
     </section>
 
     <section class="contact" id="contact">
       <div class="reveal">
-        <div class="eyebrow">Have a project in mind?</div>
-        <h2>Let's talk<span style="color:#9aaa91">.</span></h2>
+        <div class="eyebrow" data-i18n="contact.eyebrow">Have a project in mind?</div>
+        <h2 data-i18n-html="contact.title">Let's talk<span style="color:#9aaa91">.</span></h2>
       </div>
       <div class="contact-right reveal">
-        <div>CONTACT</div>
-        <a class="text-link" href="mailto:your.email@example.com">your.email@example.com ↗</a>
-        <div style="margin-top:12px">BASED IN · YOUR CITY</div>
+        <div data-i18n="contact.label">CONTACT</div>
+        <a class="text-link" href="mailto:2823849139@qq.com">2823849139@qq.com ↗</a>
+        <div style="margin-top:12px" data-i18n="contact.location">BASED IN · YOUR CITY</div>
       </div>
     </section>
   </main>
 
-  <footer><span>© <span id="year"></span> YOUR NAME</span><span>Designed with curiosity · Back to top ↑</span></footer>
+  <footer><span>© <span id="year"></span> <span data-i18n="brand.short">刘恩彤</span></span><span data-i18n="footer.right">Designed with curiosity · Back to top ↑</span></footer>
 
   <div class="modal" id="projectModal" aria-hidden="true">
     <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="close" id="closeModal" aria-label="Close project details">×</button>
+      <button class="close" id="closeModal" aria-label="Close project details" data-i18n-aria="modal.close">×</button>
       <div class="modal-visual"><img id="modalImage" src="" alt=""></div>
       <div class="modal-copy">
         <div class="eyebrow" id="modalNumber">PROJECT 01</div>
         <h3 id="modalTitle"></h3>
         <p id="modalDescription"></p>
-        <div class="detail-label">Focus</div>
+        <div class="detail-label" data-i18n="modal.focus">Focus</div>
         <p id="modalFocus"></p>
-        <div class="detail-label">Project note</div>
+        <div class="detail-label" data-i18n="modal.note">Project note</div>
         <p id="modalNote"></p>
       </div>
     </div>
   </div>
 
   <script>
-    // Edit the project copy here. Descriptions are intentionally limited to what the supplied images support.
+    const i18n = {
+      en: {
+        brand: "刘恩彤®", "brand.short": "刘恩彤",
+        "nav.label": "Main navigation", "nav.work": "Works", "nav.about": "About", "nav.contact": "Contact",
+        "lang.label": "Language",
+        "hero.eyebrow": "Independent design portfolio · 2026—2027",
+        "hero.title": "Making sense<br>of <em>visual</em><br>experiences.",
+        "hero.note": "A collection of explorations across digital environments, generative visuals, information and space. Interested in the connections between visual language, technology and experience.",
+        "hero.index": "SELECTED WORKS<br>01 — 04 / SCROLL TO EXPLORE ↓",
+        "work.title": "Selected works", "work.index": "Four projects / A visual index",
+        "p1.title": "Urban Environment", "p1.type": "Digital space · UE5", "p1.aria": "Open Urban Environment project",
+        "p2.title": "Generative Forms", "p2.type": "Generative visual · TouchDesigner", "p2.aria": "Open Generative Forms project",
+        "p3.title": "Digital Music Visualization", "p3.type": "Data visualization · Motion", "p3.aria": "Open Digital Music Visualization project",
+        "p4.title": "Spatial Mapping", "p4.type": "Information design · Mapping", "p4.aria": "Open Spatial Mapping project",
+        "about.title": "A little about me",
+        "about.lead": "Exploring how images, information and technology can shape the way we see and experience the world.",
+        "about.body": "I am an Art & Technology student interested in visual communication, digital media and experimental design. This portfolio brings together selected studies and projects that explore different ways of translating ideas into visual and spatial experiences.",
+        "contact.eyebrow": "Have a project in mind?",
+        "contact.title": "Let's talk<span style=\"color:#9aaa91\">.</span>",
+        "contact.label": "CONTACT", "contact.location": "BASED IN · YOUR CITY",
+        "footer.right": "Designed with curiosity · Back to top ↑",
+        "modal.focus": "Focus", "modal.note": "Project note", "modal.close": "Close project details", "modal.project": "PROJECT",
+        __title: "刘恩彤 — Selected Works",
+        __description: "A selected collection of digital experiments, visual systems and spatial explorations."
+      },
+      zh: {
+        brand: "刘恩彤®", "brand.short": "刘恩彤",
+        "nav.label": "主导航", "nav.work": "作品", "nav.about": "关于", "nav.contact": "联系",
+        "lang.label": "语言",
+        "hero.eyebrow": "独立设计作品集 · 2026—2027",
+        "hero.title": "理解<br><em>视觉</em><br>体验。",
+        "hero.note": "一组跨越数字环境、生成视觉、信息与空间领域的探索，关注视觉语言、技术与体验之间的联系。",
+        "hero.index": "精选作品<br>01 — 04 / 向下滚动浏览 ↓",
+        "work.title": "精选作品", "work.index": "四个项目 / 视觉索引",
+        "p1.title": "城市环境", "p1.type": "数字空间 · UE5", "p1.aria": "查看城市环境项目",
+        "p2.title": "生成形态", "p2.type": "生成视觉 · TouchDesigner", "p2.aria": "查看生成形态项目",
+        "p3.title": "数字音乐可视化", "p3.type": "数据可视化 · 动态", "p3.aria": "查看数字音乐可视化项目",
+        "p4.title": "空间地图", "p4.type": "信息设计 · 地图", "p4.aria": "查看空间地图项目",
+        "about.title": "关于我",
+        "about.lead": "探索图像、信息与技术如何塑造我们观察和体验世界的方式。",
+        "about.body": "我是一名艺术与技术专业的学生，对视觉传达、数字媒体与实验设计充满兴趣。本作品集汇集了精选的习作与项目，探索将想法转化为视觉与空间体验的多种方式。",
+        "contact.eyebrow": "有项目想法吗？",
+        "contact.title": "聊聊吧<span style=\"color:#9aaa91\">。</span>",
+        "contact.label": "联系方式", "contact.location": "所在地 · 你的城市",
+        "footer.right": "用好奇心设计 · 返回顶部 ↑",
+        "modal.focus": "方向", "modal.note": "项目说明", "modal.close": "关闭项目详情", "modal.project": "项目",
+        __title: "刘恩彤 — 精选作品",
+        __description: "精选数字实验、视觉系统与空间探索作品集。"
+      }
+    };
+
     const projects = [
       {
-        title: "Urban Environment",
-        image: "assets/01-urban-environment.jpg",
-        description: "A digital urban scene exploring the visual character of a compact streetscape. The composition brings together residential buildings, roads, street furniture and layered architectural details to create a cohesive sense of place.",
-        focus: "Digital environment · Urban composition · UE5",
-        note: "A study of how built forms and street-level elements work together to shape the atmosphere of a digital city."
+        image: "images/01-urban-environment.jpg",
+        en: {
+          title: "Urban Environment",
+          description: "A digital urban scene exploring the visual character of a compact streetscape. The composition brings together residential buildings, roads, street furniture and layered architectural details to create a cohesive sense of place.",
+          focus: "Digital environment · Urban composition · UE5",
+          note: "A study of how built forms and street-level elements work together to shape the atmosphere of a digital city."
+        },
+        zh: {
+          title: "城市环境",
+          description: "一处数字城市场景，探索紧凑街区的视觉特质。画面将住宅建筑、道路、街道设施与层次丰富的建筑细节融为一体，营造出连贯的场所感。",
+          focus: "数字环境 · 城市构图 · UE5",
+          note: "研究建筑形态与街道元素如何共同塑造数字城市的空间氛围。"
+        }
       },
       {
-        title: "Generative Forms",
-        image: "assets/02-generative-visual.jpg",
-        description: "An abstract visual experiment built around flowing contours, particles and luminous color. Green and violet traces form an organic structure against a dark field, exploring the tension between order, movement and visual noise.",
-        focus: "Generative imagery · Particle-like forms · Digital experimentation",
-        note: "The image is presented as a visual outcome; specific input data, node networks and interaction behavior can be added once the production process is confirmed."
+        image: "images/02-generative-visual.jpg",
+        en: {
+          title: "Generative Forms",
+          description: "An abstract visual experiment built around flowing contours, particles and luminous color. Green and violet traces form an organic structure against a dark field, exploring the tension between order, movement and visual noise.",
+          focus: "Generative imagery · Particle-like forms · Digital experimentation",
+          note: "The image is presented as a visual outcome; specific input data, node networks and interaction behavior can be added once the production process is confirmed."
+        },
+        zh: {
+          title: "生成形态",
+          description: "一场围绕流动轮廓、粒子与发光色彩展开的抽象视觉实验。绿色与紫色的轨迹在深色背景上构成有机结构，探索秩序、运动与视觉噪声之间的张力。",
+          focus: "生成图像 · 粒子形态 · 数字实验",
+          note: "图像作为视觉成果呈现；待制作流程确认后，可补充具体的输入数据、节点网络与交互行为。"
+        }
       },
       {
-        title: "Digital Music Visualization",
-        image: "assets/03-digital-music-visualization.jpg",
-        description: "A visual exploration of translating musical information into digital imagery. The project board presents a sequence from audio input and data analysis through parameter extraction, visual mapping and motion generation.",
-        focus: "Audio visualization · Data mapping · Motion graphics",
-        note: "The supplied board documents the proposed workflow and visual outcomes. Further details about the audio source and implementation can be added if needed."
+        image: "images/03-digital-music-visualization.jpg",
+        en: {
+          title: "Digital Music Visualization",
+          description: "A visual exploration of translating musical information into digital imagery. The project board presents a sequence from audio input and data analysis through parameter extraction, visual mapping and motion generation.",
+          focus: "Audio visualization · Data mapping · Motion graphics",
+          note: "The supplied board documents the proposed workflow and visual outcomes. Further details about the audio source and implementation can be added if needed."
+        },
+        zh: {
+          title: "数字音乐可视化",
+          description: "将音乐信息转化为数字图像的视觉探索。项目展板呈现了从音频输入、数据分析，到参数提取、视觉映射与动态生成的完整流程。",
+          focus: "音频可视化 · 数据映射 · 动态图形",
+          note: "展板记录了预设的工作流程与视觉成果。如有需要，可补充关于音频来源与实现方式的更多细节。"
+        }
       },
       {
-        title: "Spatial Mapping",
-        image: "assets/04-spatial-mapping.jpg",
-        description: "A map-based information design study using a restrained pink palette to organize streets, buildings, landmarks and points of interest. The visual hierarchy helps distinguish spatial structure from location-specific information.",
-        focus: "Cartographic styling · Spatial information · Visual hierarchy",
-        note: "The map is shown as a visual information layer. Its intended audience, geographic context and navigation purpose can be specified once confirmed."
+        image: "images/04-spatial-mapping.jpg",
+        en: {
+          title: "Spatial Mapping",
+          description: "A map-based information design study using a restrained pink palette to organize streets, buildings, landmarks and points of interest. The visual hierarchy helps distinguish spatial structure from location-specific information.",
+          focus: "Cartographic styling · Spatial information · Visual hierarchy",
+          note: "The map is shown as a visual information layer. Its intended audience, geographic context and navigation purpose can be specified once confirmed."
+        },
+        zh: {
+          title: "空间地图",
+          description: "一项基于地图的信息设计研究，以克制的粉色系组织街道、建筑、地标与兴趣点。视觉层级有助于区分空间结构与位置信息。",
+          focus: "地图样式 · 空间信息 · 视觉层级",
+          note: "地图作为视觉信息层呈现。待确认后，可明确其目标受众、地理背景与导航用途。"
+        }
       }
     ];
 
     const modal = document.getElementById("projectModal");
     const modalImage = document.getElementById("modalImage");
-    function openProject(index) {
+    let currentLang = localStorage.getItem("portfolio-lang") || "en";
+    if (!i18n[currentLang]) currentLang = "en";
+    let activeProject = null;
+
+    function renderProject(index) {
       const p = projects[index];
       if (!p) return;
-      document.getElementById("modalNumber").textContent = `PROJECT ${String(index + 1).padStart(2, "0")} / 04`;
-      document.getElementById("modalTitle").textContent = p.title;
-      document.getElementById("modalDescription").textContent = p.description;
-      document.getElementById("modalFocus").textContent = p.focus;
-      document.getElementById("modalNote").textContent = p.note;
+      const c = p[currentLang];
+      document.getElementById("modalNumber").textContent = `${i18n[currentLang]["modal.project"]} ${String(index + 1).padStart(2, "0")} / 04`;
+      document.getElementById("modalTitle").textContent = c.title;
+      document.getElementById("modalDescription").textContent = c.description;
+      document.getElementById("modalFocus").textContent = c.focus;
+      document.getElementById("modalNote").textContent = c.note;
       modalImage.src = p.image;
-      modalImage.alt = p.title;
+      modalImage.alt = c.title;
+    }
+
+    function openProject(index) {
+      if (!projects[index]) return;
+      activeProject = index;
+      renderProject(index);
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
       document.getElementById("closeModal").focus();
     }
+
     function closeProject() {
+      activeProject = null;
       modal.classList.remove("open");
       modal.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
     }
+
+    function setLang(lang) {
+      if (!i18n[lang]) return;
+      currentLang = lang;
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.dataset.i18n;
+        if (i18n[lang][key] != null) el.textContent = i18n[lang][key];
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach(el => {
+        const key = el.dataset.i18nHtml;
+        if (i18n[lang][key] != null) el.innerHTML = i18n[lang][key];
+      });
+      document.querySelectorAll("[data-i18n-aria]").forEach(el => {
+        const key = el.dataset.i18nAria;
+        if (i18n[lang][key] != null) el.setAttribute("aria-label", i18n[lang][key]);
+      });
+      document.title = i18n[lang].__title;
+      document.querySelector('meta[name="description"]').content = i18n[lang].__description;
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        const on = btn.dataset.lang === lang;
+        btn.classList.toggle("active", on);
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      localStorage.setItem("portfolio-lang", lang);
+      if (activeProject !== null) renderProject(activeProject);
+    }
+
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", () => setLang(btn.dataset.lang));
+    });
+    setLang(currentLang);
+
     document.querySelectorAll(".project").forEach(card => {
       const picture = card.querySelector(".project-image");
       picture.addEventListener("pointermove", event => {
